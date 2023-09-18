@@ -53,18 +53,10 @@ void setup() {
   pinMode(HEAT_L, OUTPUT);
   pinMode(FUN_L, OUTPUT);
   Serial.begin(9600);
-
   lcd.begin(16, 2);
-
   lcd.setCursor(0, 0);
-
   lcd.setCursor(0, 1);
-  //pinMode(BUTTON_HEAT, INPUT_PULLUP);
-  //pinMode(BUTTON_TIMER, INPUT_PULLUP);
-  //attachInterrupt(0, heat_button_action, FALLING);
-  //attachInterrupt(1, timer_button_action, FALLING);
   delay(500);
-
 }
 
 ISR(TIMER1_OVF_vect)                    // процедура обработки прерывания переполнения счетчика
@@ -104,7 +96,7 @@ void Timer() {
     if (sec < 0){
       sec = 59;
       min -= 1;
-    }   // Чтение и отправка температуры в последовательный порт
+    }  
 
     if (min == 0 && sec == 0) {
       
@@ -124,7 +116,7 @@ void TimerFun() {
     if (fun_sec < 0){
       fun_sec = 59;
       fun_min -= 1;
-    }   // Чтение и отправка температуры в последовательный порт
+    }   
 
     if (fun_min == 0 && fun_sec == 0) {
       
@@ -194,11 +186,6 @@ void lcd_display() {
     lcd.print("m)");
   }
   
-}
-void printDisplay(const char* str) {
-  lcd.clear();
-  lcd.setCursor(0, 0);
-  lcd.print(str);
 }
 
 void temp_set() {
@@ -311,7 +298,6 @@ void set_timer_fun() {
   }
 }
 
-
 void settings() {
   temp_set(); 
   set_timer();
@@ -348,9 +334,6 @@ void loop() {
 
   get_temp();
   lcd_display();
-
-  //heat = heat^digitalRead(BUTTON_HEAT);
-  //timer = timer^digitalRead(BUTTON_TIMER);
 
   if (heat) {
   
